@@ -167,7 +167,7 @@ export default function MedicalAIWorkspace({ reportId, report, analysisData }) {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 flex-1 items-start">
         {/* Left Column (Clinical Dashboard) */}
         <div className="hidden lg:block lg:col-span-3">
-          <LeftClinicalDashboard report={report} analysisData={analysisData} organScores={insights?.organ_scores} />
+          <LeftClinicalDashboard report={report} analysisData={analysisData} organScores={insights?.organ_scores} insights={insights} />
         </div>
 
         {/* Center Column (Chat Workspace Feed & Input) */}
@@ -239,7 +239,7 @@ export default function MedicalAIWorkspace({ reportId, report, analysisData }) {
               <h3 className="font-bold text-sm">Clinical Dashboard</h3>
               <button onClick={() => setShowLeftMobile(false)}><X className="w-5 h-5" /></button>
             </div>
-            <LeftClinicalDashboard report={report} analysisData={analysisData} organScores={insights?.organ_scores} />
+            <LeftClinicalDashboard report={report} analysisData={analysisData} organScores={insights?.organ_scores} insights={insights} />
           </div>
         </div>
       )}

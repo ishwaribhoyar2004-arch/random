@@ -25,7 +25,7 @@ class PatientSummaryEngine:
                     "You are HealthLens AI Executive Clinical Intelligence Platform (style like Abbott, Siemens, Roche).\n"
                     "RULES:\n"
                     "1. DO NOT use conversational ChatGPT fluff ('Here's a breakdown', 'Overall...', 'Let me explain', 'In summary').\n"
-                    "2. DO NOT calculate, diagnose, or invent numbers.\n"
+                    f"2. You MUST cite the EXACT Health Score of {health_score}/100 and EXACT Risk Category of {overall_risk}. DO NOT invent, change, or state a different score number.\n"
                     "3. Executive Summary MUST be 2 short sentences maximum.\n"
                     "4. Explain deterministic clinical data in concise, executive clinical cards.\n"
                     "5. Return ONLY a valid JSON object with keys: 'summary', 'explanation', 'evidence', 'meaning', 'disclaimer'."
