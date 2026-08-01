@@ -195,14 +195,14 @@ export const OCRViewer = ({ report, ocrData, onRetry, isProcessing = false }) =>
           <div className="flex-1 relative bg-slate-50 border border-slate-200/80 rounded-xl overflow-hidden flex items-center justify-center p-2 min-h-[480px]">
             {report?.mime_type === 'application/pdf' || report?.filename?.endsWith('.pdf') ? (
               <iframe
-                src={`http://localhost:8000${report?.file_url}`}
+                src={`${import.meta.env.VITE_API_BASE_URL || ''}${report?.file_url}`}
                 className="w-full h-full min-h-[500px] rounded-lg border-0"
                 title="Original PDF Document"
               />
             ) : report?.mime_type?.startsWith('image/') || /\.(jpg|jpeg|png)$/i.test(report?.filename || '') ? (
               <div className="relative w-full h-full flex items-center justify-center">
                 <img
-                  src={`http://localhost:8000${report?.file_url}`}
+                   src={`${import.meta.env.VITE_API_BASE_URL || ''}${report?.file_url}`}
                   alt="Original Report Scan"
                   className="max-h-[520px] object-contain rounded-lg shadow-sm"
                 />
