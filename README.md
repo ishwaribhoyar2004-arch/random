@@ -2,10 +2,10 @@ Medical Report Analyzer — AI-Powered Clinical Intelligence Platform
 Team ID: CX012 Team Name: Iveri
 
 Team Members
-Nishant Datta – Full Stack & Clinical Intelligence Engineer
-Ishwari Bhoyar – Frontend & UI/UX Developer
-Gunjan Nandeshwar – Backend & Database Engineer
-Nazish Khan – AI & RAG Pipeline Engineer
+Nishant Datta – Full Stack & Core Gen ai Engineer
+Ishwari Bhoyar – AI & RAG Pipeline Engineer
+Gunjan Nandeshwar – Document Ingestion and QA
+Nazish Khan – Product Engineer (Rsearch & development )
 
 Problem Statement
 Medical diagnostic lab reports contain complex, unstructured laboratory data with technical jargon, inconsistent reference ranges, and varying units that are difficult for patients and healthcare providers to interpret quickly. HealthLens AI solves this by providing automated multi-page OCR document extraction, hardened multi-layer physiological validation, deterministic clinical intelligence scoring across 5 organ systems, and a report-scoped GPT-5 Nano RAG assistant for transparent, evidence-based medical report interpretation.
