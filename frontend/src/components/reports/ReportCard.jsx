@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import ConfidenceBadge from '../ocr/ConfidenceBadge';
 import FEATURES from '../../config/features';
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
 
 const formatBytes = (bytes) => {
   if (!bytes) return '—';
