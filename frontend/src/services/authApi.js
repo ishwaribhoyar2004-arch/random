@@ -11,6 +11,11 @@ export const authApi = {
     return response.data;
   },
 
+  demoLogin: async () => {
+    const response = await api.post('/auth/demo');
+    return response.data;
+  },
+
   getMe: async () => {
     const response = await api.get('/auth/me');
     return response.data;
