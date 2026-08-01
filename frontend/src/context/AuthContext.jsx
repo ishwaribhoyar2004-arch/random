@@ -16,6 +16,21 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   }, []);
 
+  // Demo auto-login helper
+  const performDemoLogin = useCallback(async () => {
+    try {
+      const demoData = await authApi.demoLogin();
+      const { access_token, user: userData } = demoData;
+      localStorage.setItem('token', access_token);
+      localStorage.setItem('user', JSON.stringify(userData));
+      setToken(access_token);
+      setUser(userData);
+      return userData;
+    } catch (err) {
+      console.error('Demo auto-login failed:', err);
+    }
+  }, []);
+
   // Check persistent auth status on app initialization
   useEffect(() => {
     const initAuth = async () => {
@@ -26,25 +41,27 @@ export const AuthProvider = ({ children }) => {
           setUser(userData);
           setToken(storedToken);
         } catch (error) {
-          console.error("Authentication session expired:", error);
-          logout();
+          console.warn("Auth token invalid/expired. Auto-logging into demo session...", error);
+          await performDemoLogin();
         }
+      } else {
+        await performDemoLogin();
       }
       setLoading(false);
     };
 
     initAuth();
-  }, [logout]);
+  }, [performDemoLogin]);
 
   // Handle unauthorized event dispatched by Axios interceptor
   useEffect(() => {
     const handleUnauthorized = () => {
-      logout();
+      performDemoLogin();
     };
 
     window.addEventListener('auth-unauthorized', handleUnauthorized);
     return () => window.removeEventListener('auth-unauthorized', handleUnauthorized);
-  }, [logout]);
+  }, [performDemoLogin]);
 
   // Login handler
   const login = async (credentials) => {
@@ -75,9 +92,12 @@ export const AuthProvider = ({ children }) => {
         login,
         register,
         logout,
+        performDemoLogin
       }}
     >
       {children}
     </AuthContext.Provider>
   );
 };
+
+export default AuthContext;

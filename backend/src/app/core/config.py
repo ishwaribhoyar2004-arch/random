@@ -2,6 +2,18 @@ import os
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from typing import List
 
+# Find backend root directory containing .env
+def find_env_file():
+    curr = os.path.abspath(__file__)
+    for _ in range(6):
+        curr = os.path.dirname(curr)
+        env_candidate = os.path.join(curr, ".env")
+        if os.path.exists(env_candidate):
+            return env_candidate
+    return ".env"
+
+env_path = find_env_file()
+
 class Settings(BaseSettings):
     PROJECT_NAME: str = "Medical Report Analyzer API"
     VERSION: str = "1.0.0"
@@ -13,11 +25,10 @@ class Settings(BaseSettings):
     
     DATABASE_URL: str = "sqlite:///./sql_app.db"
     
-    OPENAI_API_KEY: str = ""
-    SARVAM_API_KEY: str = ""
+    OPENAI_API_KEY: str = "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"
+    SARVAM_API_KEY: str = "sk_3pz1jdrr_bki9fbaS9sCNa0Whsd82pnd4"
     SARVAM_CHAT_API_KEY: str = ""
     GLM_API_KEY: str = ""
-
 
     # Phase 7 RAG Configuration
     RETRIEVAL_CANDIDATES: int = 100
@@ -25,7 +36,6 @@ class Settings(BaseSettings):
     FINAL_CONTEXT: int = 5
     RETRIEVAL_CACHE_TTL_SEC: int = 900
 
-    
     CORS_ORIGINS: List[str] = [
         "http://localhost:5173",
         "http://localhost:3000",
@@ -34,7 +44,7 @@ class Settings(BaseSettings):
     ]
 
     model_config = SettingsConfigDict(
-        env_file=os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), ".env"),
+        env_file=env_path,
         env_file_encoding="utf-8",
         extra="ignore"
     )
