@@ -3,7 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import {
   ArrowLeft, Cpu, Sparkles, ShieldCheck, Download,
   Loader2, AlertCircle, RefreshCw, FileText,
-  ScanText, Activity, ChevronRight, ExternalLink, Bot
+  ScanText, Activity, ChevronRight, Bot
 } from 'lucide-react';
 import { ocrApi } from '../services/ocrApi';
 import { parserApi } from '../services/parserApi';
@@ -18,37 +18,14 @@ import { ValidationSummaryCard } from '../components/validation/ValidationSummar
 import ValidationStatusTable from '../components/validation/ValidationStatusTable';
 import { CriticalValuesCard } from '../components/validation/CriticalValuesCard';
 import ParameterDetailDrawer from '../components/validation/ParameterDetailDrawer';
-
-import { MedicalAnalysisDashboard } from '../components/analysis/MedicalAnalysisDashboard';
 import MedicalAIWorkspace from '../components/chat/MedicalAIWorkspace/MedicalAIWorkspace';
 
 
 const TABS = [
-  { id: 'ocr',          label: 'OCR & Text Extraction', icon: ScanText,    phase: 'Phase 3' },
-  { id: 'parser',       label: 'Medical Data Extraction', icon: Sparkles,  phase: 'Phase 4' },
-  { id: 'validation',   label: 'Clinical Validation',   icon: ShieldCheck, phase: 'Phase 5' },
-  { id: 'chat',         label: 'Medical AI Assistant', icon: Bot,         phase: 'Phase 7' },
+  { id: 'ocr',        label: 'OCR & Text Extraction', icon: ScanText,    phase: 'Phase 3' },
+  { id: 'validation', label: 'Medical Data & Validation', icon: ShieldCheck, phase: 'Phase 4 & 5' },
+  { id: 'chat',       label: 'Medical AI Assistant',  icon: Bot,         phase: 'Phase 7' },
 ];
-
-
-
-/* ─────────────────────────────────────────────────────────────── */
-/*  Pipeline Step Badge                                            */
-/* ─────────────────────────────────────────────────────────────── */
-const StepBadge = ({ label, active, done, onClick }) => (
-  <button
-    onClick={onClick}
-    className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold border transition-all ${
-      active
-        ? 'bg-sky-500 text-white border-sky-400 shadow-lg shadow-sky-500/20'
-        : done
-        ? 'bg-emerald-950 text-emerald-300 border-emerald-800'
-        : 'bg-slate-800 text-slate-400 border-slate-700 hover:border-slate-500'
-    }`}
-  >
-    {label}
-  </button>
-);
 
 /* ─────────────────────────────────────────────────────────────── */
 /*  Main Page                                                      */
@@ -67,7 +44,7 @@ const ReportDetailPage = () => {
   const [ocrLoading, setOcrLoading] = useState(false);
   const [ocrError, setOcrError] = useState(null);
 
-  // Validation state
+  // Unified Validation state
   const [validationData, setValidationData] = useState(null);
   const [validationSummary, setValidationSummary] = useState(null);
   const [criticalValues, setCriticalValues] = useState([]);
@@ -113,14 +90,14 @@ const ReportDetailPage = () => {
     }
   }, [reportId]);
 
-  // Auto-run OCR when switching to the tab
+  // Auto-run OCR when switching to OCR tab
   useEffect(() => {
     if (activeTab === 'ocr' && !ocrData && !ocrLoading) {
       runOCR(false);
     }
   }, [activeTab]);
 
-  /* ── Phase 5 Validation ─────────────────────────────────────── */
+  /* ── Unified Validation & Data Extraction ────────────────────── */
   const runValidation = useCallback(async (retry = false) => {
     setValidationLoading(true);
     setValidationError(null);
@@ -136,11 +113,11 @@ const ReportDetailPage = () => {
       setValidationSummary(vSummary);
       setCriticalValues(vCritical);
       setQualityScore(vQuality?.score ?? null);
-      if (retry) showSuccess('Validation engine re-run complete.');
+      if (retry) showSuccess('Validation & Data Extraction complete.');
     } catch (err) {
       setValidationError(err?.response?.data?.detail || 'Validation failed. Please retry.');
       showError('Validation engine error.');
-    } finally {
+    } fontinally: {
       setValidationLoading(false);
     }
   }, [reportId]);
@@ -220,10 +197,6 @@ const ReportDetailPage = () => {
           {TABS.map((tab, idx) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
-            const isDone =
-              (tab.id === 'ocr' && !!ocrData) ||
-              (tab.id === 'parser') ||
-              (tab.id === 'validation' && !!validationData);
 
             return (
               <React.Fragment key={tab.id}>
@@ -286,19 +259,17 @@ const ReportDetailPage = () => {
             </div>
           )}
 
-          {/* ═══ PARSER TAB ═══════════════════════════════════ */}
-          {activeTab === 'parser' && (
-            <MedicalDataViewer
-              reportId={Number(reportId)}
-              reportName={report?.original_filename}
-            />
-          )}
-
-          {/* ═══ VALIDATION TAB ═══════════════════════════════ */}
+          {/* ═══ UNIFIED MEDICAL DATA EXTRACTION & CLINICAL VALIDATION TAB (PHASE 4 & 5) ═════ */}
           {activeTab === 'validation' && (
             <div>
-              {/* Toolbar */}
-              <div className="flex flex-wrap items-center justify-between gap-3 mb-5">
+              {/* Medical Data Patient Metadata Viewer */}
+              <MedicalDataViewer
+                reportId={Number(reportId)}
+                reportName={report?.original_filename}
+              />
+
+              {/* Validation Section Header & Toolbar */}
+              <div className="mt-8 pt-6 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 mb-5">
                 <div>
                   <h2 className="text-base font-bold text-slate-800 flex items-center gap-2">
                     <Activity className="w-4 h-4 text-indigo-500" />
@@ -381,7 +352,7 @@ const ReportDetailPage = () => {
                   {validatedValues.length === 0 && (
                     <div className="text-center py-12 text-slate-500 text-sm">
                       <FileText className="w-10 h-10 text-slate-300 mx-auto mb-3" />
-                      No validated parameters found. Run the Medical Parser first (Phase 4 tab), then re-run validation.
+                      No validated parameters found. Run the Medical Parser first, then re-run validation.
                     </div>
                   )}
                 </div>
@@ -410,11 +381,8 @@ const ReportDetailPage = () => {
             <MedicalAIWorkspace reportId={reportId} report={report} analysisData={validationSummary} />
           )}
 
-
         </div>
       </div>
-
-
 
       {/* ── Parameter Detail Drawer ──────────────────────────── */}
       {selectedParam && (
