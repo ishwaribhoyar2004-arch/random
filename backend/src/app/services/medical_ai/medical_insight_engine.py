@@ -2,7 +2,7 @@
 Master Medical AI Insight Engine (Phase 7 — Architecture Freeze v8.2).
 Coordinates GPT-5 Nano explanation layer over Phase 4-6 deterministic outputs.
 Caches Clinical Intelligence in DB for sub-second load times.
-Ensures 100% synchronized Health Score & Risk Category between card and narrative.
+Ensures 100% real, dynamic calculated Health Score & Risk Category.
 """
 
 import json
@@ -17,6 +17,37 @@ from app.services.medical_ai.doctor_summary import DoctorSummaryEngine
 from app.services.medical_ai.json_validator import JSONSchemaValidator
 from app.services.medical_ai.response_formatter import ResponseFormatter
 from app.services.medical_ai.response_enhancer import ResponseEnhancer
+
+
+def compute_real_health_score(deterministic_analysis: Dict[str, Any]) -> tuple:
+    """Calculates the REAL health score and risk category dynamically from validated report parameters."""
+    val_params = deterministic_analysis.get("validated_parameters") or []
+    if not val_params:
+        raw_score = int(deterministic_analysis.get("overall_health_score") or 85)
+        raw_risk = "LOW" if raw_score >= 85 else "MODERATE"
+        return raw_score, raw_risk
+
+    score = 100
+    for p in val_params:
+        status = str(p.get("status") or "").upper()
+        if "CRITICAL" in status or status == "INVALID_VALUE":
+            score -= 18
+        elif status in ["HIGH", "LOW", "MODERATE_HIGH", "MODERATE_LOW", "SEVERE_HIGH", "SEVERE_LOW"]:
+            score -= 8
+        elif status in ["MISSING_REFERENCE", "REVIEW", "PENDING"]:
+            score -= 3
+
+    final_score = max(10, min(100, score))
+    if final_score >= 85:
+        risk = "LOW"
+    elif final_score >= 65:
+        risk = "MODERATE"
+    elif final_score >= 45:
+        risk = "HIGH"
+    else:
+        risk = "CRITICAL"
+
+    return final_score, risk
 
 
 def compute_dynamic_organ_scores(deterministic_analysis: Dict[str, Any]) -> Dict[str, int]:
@@ -52,10 +83,8 @@ def sync_health_score_in_text(text: str, health_score: int, risk_category: str) 
     """Ensures AI summary text matches the exact calculated health score and risk category."""
     if not text:
         return ""
-    # Synchronize score patterns like "score of 66", "score of 71", "Score of 66 out of 100"
     synced = re.sub(r"(Health Score of|score of|Score of)\s+\d+(\s+out of\s+100)?", rf"\1 {health_score}\2", text, flags=re.IGNORECASE)
-    # Synchronize risk category patterns if mismatch exists
-    synced = re.sub(r"\b(moderate|high|critical)\s+risk\b", f"{risk_category.lower()} risk", synced, flags=re.IGNORECASE)
+    synced = re.sub(r"\b(moderate|high|critical|low)\s+risk\b", f"{risk_category.lower()} risk", synced, flags=re.IGNORECASE)
     return synced
 
 
@@ -68,8 +97,11 @@ class MedicalInsightEngine:
     def get_or_generate_insights(self, db: Session, report_id: int, deterministic_analysis: Dict[str, Any]) -> Dict[str, Any]:
         """Fetches cached Clinical Intelligence or generates & stores in SQLite."""
         organ_scores = compute_dynamic_organ_scores(deterministic_analysis)
-        health_score = int(deterministic_analysis.get("overall_health_score", 90))
-        overall_risk = str(deterministic_analysis.get("overall_risk", "LOW")).upper()
+        health_score, overall_risk = compute_real_health_score(deterministic_analysis)
+
+        # Update deterministic_analysis object
+        deterministic_analysis["overall_health_score"] = health_score
+        deterministic_analysis["overall_risk"] = overall_risk
 
         # 1. Check DB Cache
         cached = db.query(CachedClinicalIntelligence).filter(CachedClinicalIntelligence.report_id == report_id).first()
@@ -78,7 +110,6 @@ class MedicalInsightEngine:
                 p_summary = json.loads(cached.patient_summary_json)
                 d_summary = json.loads(cached.doctor_summary_json)
 
-                # Synchronize cached summary text to exact single-source health_score
                 if isinstance(p_summary, dict) and p_summary.get("summary"):
                     p_summary["summary"] = sync_health_score_in_text(p_summary["summary"], health_score, overall_risk)
 
@@ -101,7 +132,6 @@ class MedicalInsightEngine:
         fmt_patient = ResponseFormatter.format_response(parsed_patient, deterministic_analysis.get("validated_parameters"))
         enhanced_patient = ResponseEnhancer.enhance(fmt_patient, deterministic_analysis.get("validated_parameters"))
 
-        # Synchronize generated summary text to exact single-source health_score
         if isinstance(enhanced_patient, dict) and enhanced_patient.get("summary"):
             enhanced_patient["summary"] = sync_health_score_in_text(enhanced_patient["summary"], health_score, overall_risk)
 
