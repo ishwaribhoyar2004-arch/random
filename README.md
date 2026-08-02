@@ -1,30 +1,56 @@
-# HealthLens AI — Medical Report Analyzer & Clinical Intelligence Platform
+<div align="center">
 
-![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)
-![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
-![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
-![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-blue?style=for-the-badge&logo=python&logoColor=white)
-![OpenAI GPT-5 Nano](https://img.shields.io/badge/AI-GPT--5%20Nano-emerald?style=for-the-badge&logo=openai)
-![Pytest](https://img.shields.io/badge/Tests-250%2F250%20Passed-brightgreen?style=for-the-badge&logo=pytest)
-![TailwindCSS](https://img.shields.io/badge/TailwindCSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
-![Status](https://img.shields.io/badge/Status-Production%20Ready-success?style=for-the-badge)
+# 🩺 HealthLens AI
+### *Enterprise Medical Report Intelligence & Clinical AI Workstation*
 
-**Team ID:** `CX012` | **Team Name:** `Iveri` | **Hackathon:** `CODEX Hackfest 2026`
+[![CODEX Hackfest 2026](https://img.shields.io/badge/CODEX--Hackfest-2026%20Finalist-8A2BE2?style=for-the-badge&logo=target)](https://github.com/CODEX-Hackfest-2026/CX012-Iveri)
+[![Team Iveri](https://img.shields.io/badge/Team%20CX012-Iveri-00F5D4?style=for-the-badge)](https://github.com/CODEX-Hackfest-2026/CX012-Iveri)
+[![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com)
+[![React 18](https://img.shields.io/badge/React%2018-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev)
+[![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev)
+[![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-blue?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
+[![OpenAI GPT-5 Nano](https://img.shields.io/badge/AI-GPT--5%20Nano-10a37f?style=for-the-badge&logo=openai)](https://openai.com)
+[![Pytest Passed](https://img.shields.io/badge/Tests-250%2F250%20Passed-brightgreen?style=for-the-badge&logo=pytest)](https://docs.pytest.org)
+[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 
 ---
 
-## 👥 Team Members & Contributors
+**[📖 Documentation](docs/Architecture.md)** • **[⚡ Quick Start](#-quick-start--installation-guide)** • **[🧪 Test Suite](#-test-coverage--quality-matrix-250250-passed)** • **[📡 API Spec](docs/API.md)** • **[🛡️ Guardrails](#%EF%B8%8F-5-layer-safety--guardrail-architecture)**
 
-| Contributor | Official Role | Key Engineering Contributions |
+</div>
+
+---
+
+## 📌 Navigation & Table of Contents
+
+- [👥 Team & Contributor Directory](#-team--contributor-directory)
+- [🎯 Problem Statement](#-problem-statement)
+- [🏗️ High-Level System Architecture](#️-high-level-system-architecture)
+- [⚡ Deep Dive: Phase-by-Phase Architecture](#-deep-dive-phase-by-phase-architecture)
+- [🫀 5-Organ System Intelligence Matrix](#-5-organ-system-intelligence-matrix)
+- [🛡️ 5-Layer Safety & Guardrail Architecture](#%EF%B8%8F-5-layer-safety--guardrail-architecture)
+- [🧪 Test Coverage & Quality Matrix (250/250 Passed)](#-test-coverage--quality-matrix-250250-passed)
+- [🛠️ Tech Stack & Dependencies](#️-tech-stack--dependencies)
+- [🚀 Quick Start & Installation Guide](#-quick-start--installation-guide)
+- [📡 API Endpoint Reference](#-api-endpoint-reference)
+
+---
+
+## 👥 Team & Contributor Directory
+
+> [!IMPORTANT]
+> **Team ID:** `CX012` | **Team Name:** `Iveri` | **Hackathon:** `CODEX Hackfest 2026`
+
+| Contributor | Official Role | Key Engineering Responsibilities |
 | :--- | :--- | :--- |
-| **Nishant Datta** | **Full Stack & Core Gen AI Engineer** | Platform Architecture, FastAPI/Vite Core, Phase 5 Hardened Validation Engine, Phase 6 Clinical Intelligence Pipeline |
-| **Ishwari Bhoyar** | **AI & RAG Pipeline Engineer** | Phase 3 Dual OCR Engine Integration, Phase 7 GPT-5 Nano RAG Assistant, Medical AI Workspace UI |
-| **Gunjan Nandeshwar** | **Document Ingestion & QA Engineer** | Phase 4 Medical Parser Dictionary & Normalizer, End-to-End Test Suite Automation (250 Tests) |
-| **Nazish Khan** | **Product Engineer (Research & Development)** | Phase 2 Smart Upload Pipeline, Clinical Guardrails & Safety Architecture, Product Specs & UX Workflow |
+| **Nishant Datta** | **Full Stack & Core Gen AI Engineer** | Core Platform Architecture, FastAPI Server, Phase 5 Hardened Validation Engine, Phase 6 Clinical Intelligence Engine |
+| **Ishwari Bhoyar** | **AI & RAG Pipeline Engineer** | Phase 3 Dual OCR Engine, Phase 7 GPT-5 Nano RAG Chat Assistant, Medical AI Workspace UI |
+| **Gunjan Nandeshwar** | **Document Ingestion & QA Engineer** | Phase 4 Medical Parser & Dictionary Normalizer, 250-Test End-to-End Automated Testing Suite |
+| **Nazish Khan** | **Product Engineer (Research & Development)** | Phase 2 Smart File Storage Pipeline, 5-Layer Safety Firewall Specs, UX Workstation Workflows |
 
 ---
 
-## 📋 Problem Statement
+## 🎯 Problem Statement
 
 Medical diagnostic lab reports contain complex, unstructured laboratory data with dense technical jargon, inconsistent reference ranges across different diagnostic labs, non-standard measurement units, and ambiguous numerical values. For both patients and busy healthcare providers, interpreting multi-page PDF/image lab reports quickly and accurately is time-consuming and error-prone.
 
@@ -37,190 +63,263 @@ Medical diagnostic lab reports contain complex, unstructured laboratory data wit
 
 ---
 
-## 🏗️ System Architecture
+## 🏗️ High-Level System Architecture
 
 ```mermaid
-flowchart TD
-    A["📄 Multi-Format Input (PDF / PNG / JPG / Mobile Upload)"] --> B["Phase 2: Smart Upload & SHA-256 Storage"]
-    B --> C["Phase 3: Dual OCR Pipeline (PyMuPDF / Sarvam Vision Engine)"]
-    C --> D["Phase 4: Medical Report Parser (Numeric & Unit Normalizer)"]
-    D --> E["Phase 5: Hardened Validation Engine (Reference Ranges & Critical Rules)"]
-    E --> F["Phase 6: Clinical Intelligence Engine (5 Organ Systems & Health Scoring)"]
-    F --> G["Phase 7: GPT-5 Nano RAG Engine (5-Layer Safety Guardrails)"]
-    G --> H["🖥️ Executive Medical AI Workstation UI"]
-
-    subgraph "Clinical Data Validation & Intelligence"
-        E
-        F
+flowchart TB
+    subgraph Client["🖥️ Executive Clinical AI Workstation (React + Vite)"]
+        UI["Upload / Dashboard / Workspace UI"]
+        Viewer["PDF & Document Bounding Box Viewer"]
+        Chat["GPT-5 Nano Report-Scoped Chat"]
     end
 
-    subgraph "Secure RAG Assistant & Workspace"
-        G
-        H
+    subgraph API["🚀 FastAPI Gateway Server"]
+        Auth["JWT Auth & Session Manager"]
+        Router["Async API Router (/v1)"]
     end
+
+    subgraph CoreEngine["⚡ 7-Phase Processing Pipeline"]
+        P2["Phase 2: SHA-256 Storage & File Deduplication"]
+        P3["Phase 3: Dual OCR Pipeline (PyMuPDF / Sarvam Vision)"]
+        P4["Phase 4: Medical Entity Parser & Unit Normalizer"]
+        P5["Phase 5: Hardened Validation Engine & Panic Alerts"]
+        P6["Phase 6: 5-Organ Clinical Intelligence & Health Scoring"]
+        P7["Phase 7: GPT-5 Nano RAG Assistant & Safety Firewall"]
+    end
+
+    subgraph Safety["🛡️ 5-Layer Safety Firewall"]
+        G1["1. Input Guard (Sanitization)"]
+        G2["2. Privacy Guard (PHI Scrubbing)"]
+        G3["3. Context Grounding Guard"]
+        G4["4. Medical Compliance Guard"]
+        G5["5. Token Budget & Rate Limiter"]
+    end
+
+    UI --> Auth
+    Auth --> Router
+    Router --> P2 --> P3 --> P4 --> P5 --> P6 --> P7
+    P7 <--> Safety
+    P7 --> Chat
+    P6 --> Viewer
 ```
 
 ---
 
-## ⚡ Key Technical Features & Phase Architecture
+## ⚡ Deep Dive: Phase-by-Phase Architecture
 
-### 📄 Phase 1: Enterprise Architecture & Project Foundation
-- Modular separation of concerns with clean API contracts (`FastAPI` backend + `Vite React` frontend).
-- Asynchronous database session management, JWT authentication, and user access control.
-- Centralized structured logging, environment configuration, and health monitoring endpoints.
+<details>
+<summary><b>📄 Phase 1: Enterprise Infrastructure & Base Architecture</b></summary>
+<br>
 
-### 📤 Phase 2: Smart Document Upload & File Management
-- Multi-format ingestion supporting high-resolution images, multi-page PDFs, and mobile camera captures.
-- SHA-256 file hashing for deduplication, secure file storage isolation, and audit trail generation.
-- Instant file preview, upload progress tracking, and file status management.
+- **Asynchronous FastAPI Core**: Built on Python 3.11 with `async/await` non-blocking request pipelines.
+- **Security & Session Management**: JWT bearer tokens, bcrypt password hashing, and CORS/CSRF protection.
+- **Relational DB Storage**: SQLAlchemy ORM with SQLite (development) and PostgreSQL (production) compatibility.
+- **Structured Telemetry**: Centralized JSON logging, automatic correlation IDs, and system health checks (`/health`).
+</details>
 
-### 👁️ Phase 3: Dual OCR & Text Extraction Pipeline
-- Hybrid extraction engine prioritizing digital text via **PyMuPDF** with fallback to **Sarvam Vision / Tesseract OCR** for scanned documents.
-- Multi-page image layout preservation, table grid boundary detection, and character confidence scoring.
-- Bounding-box highlight extraction and spatial coordinate preservation.
+<details>
+<summary><b>📤 Phase 2: Smart File Ingestion & SHA-256 Deduplication</b></summary>
+<br>
 
-### 🧪 Phase 4: Deterministic Medical Report Parser
-- Rule-based regex and dictionary-driven entity resolution mapping 100+ lab parameter aliases to standardized medical terms.
-- Automated unit conversion (e.g., `mg/dL` ↔ `mmol/L`) and numeric range parser handling `<`, `>`, `±`, and qualitative indicators.
-- Patient metadata extraction (Age, Gender, Collection Date, Lab Name, Doctor Name).
+- **Multi-Format Ingestion**: Supports multi-page PDFs, high-res PNG/JPG scans, and mobile camera snapshots.
+- **Storage Isolation**: User-level and session-isolated storage directories with automated cleanup workers.
+- **Audit Cryptography**: Computes SHA-256 hash checksums on upload to prevent duplicate processing and ensure data integrity.
+</details>
 
-### 🩺 Phase 5: Hardened Clinical Validation Engine
-- Physiological sanity boundaries detecting impossible values (e.g., negative blood glucose or pH > 14).
-- Age and gender-adjusted reference range evaluation categorizing results into `OPTIMAL`, `NORMAL`, `BORDERLINE`, `ELEVATED`, `HIGH`, `CRITICAL`.
-- Critical Panic-Value alerts triggering immediate emergency visual flags for life-threatening lab anomalies.
+<details>
+<summary><b>👁️ Phase 3: Dual-Engine OCR & Layout Extraction</b></summary>
+<br>
 
-### 📊 Phase 6: Clinical Intelligence & Multi-Organ Assessment Engine
-- Deterministic 100-point Health Score algorithm evaluated across 5 core organ systems:
-  - 🫀 **Cardiovascular System** (Lipids, Triglycerides, Cholesterol ratios)
-  - 🩸 **Hematologic System** (Hemoglobin, RBC, WBC, Platelets)
-  - 🧪 **Metabolic & Endocrine** (HbA1c, Fasting Glucose, Thyroid TSH/T3/T4)
-  - 🫘 **Renal & Kidney Function** (Creatinine, BUN, eGFR, Uric Acid)
-  - 🫁 **Hepatic & Liver Function** (ALT, AST, ALP, Bilirubin, Albumin)
-- Interactive Knowledge Graph visualization linking abnormal lab values to clinical symptoms, dietary recommendations, and organ impacts.
-- Longitudinal timeline analysis tracking patient biomarker progression across multiple historical lab tests.
+- **PyMuPDF Engine**: Fast native text and table vector extraction for digital PDFs (<50ms execution).
+- **Sarvam Vision / Tesseract Engine**: Deep-learning OCR fallback for scanned, low-contrast, or skewed physical documents.
+- **Coordinate Mapping**: Extracts exact bounding-box spatial coordinates `(x0, y0, x1, y1)` for UI document highlighting.
+</details>
 
-### 🤖 Phase 7: Report-Scoped GPT-5 Nano RAG Assistant & Workspace
-- Grounded Retrieval-Augmented Generation (RAG) restricted strictly to the patient's verified report context.
-- **5-Layer Medical Safety Firewall**:
-  1. *Input Guard*: Query sanitization and prompt injection prevention.
-  2. *Privacy Guard*: Automatic PII/PHI scrubbing prior to LLM inference.
-  3. *Retrieval Guard*: Strict document context grounding preventing hallucinated medical claims.
-  4. *Medical Compliance Guard*: Automated medical disclaimer injection and diagnostic disclaimer enforcement.
-  5. *Token Budget & Rate Limiter*: Real-time token budget management preventing API exhaustion.
-- Split-screen **Medical AI Workspace UI** featuring transparency bars, citation source cards, evidence panels, and structured clinical summaries.
+<details>
+<summary><b>🧪 Phase 4: Deterministic Medical Report Parser</b></summary>
+<br>
+
+- **Dictionary Entity Resolution**: Maps over 100+ lab parameter variants (e.g., `S. Creatinine`, `Serum Creat`, `Creatinine`) to standardized medical terms.
+- **Numeric & Range Parser**: Handles complex qualitative string values, inequality bounds (`< 0.05`, `> 200`), and `±` ranges.
+- **Automated Unit Normalizer**: Standardizes non-matching measurement units (e.g., converting `mg/dL` to `mmol/L` or `g/L` to `g/dL`).
+</details>
+
+<details>
+<summary><b>🩺 Phase 5: Hardened Clinical Validation Engine</b></summary>
+<br>
+
+- **Physiological Sanity Hardening**: Validates extracted values against strict physiological boundaries (e.g., Blood Glucose cannot be negative or > 2000 mg/dL).
+- **Demographic Reference Range Adjuster**: Adjusts reference ranges dynamically based on patient age and biological gender.
+- **Panic Critical Alerts**: Triggers instant visual flags for life-threatening critical values (e.g., Potassium < 2.8 or > 6.2 mmol/L).
+</details>
+
+<details>
+<summary><b>📊 Phase 6: Clinical Intelligence & 5-Organ Scoring</b></summary>
+<br>
+
+- **Deterministic 100-Point Scoring Algorithm**: Evaluates overall health score without AI hallucination risk.
+- **5 Organ Systems Evaluated**: Cardiovascular, Renal, Hepatic, Metabolic, and Hematologic.
+- **Interactive Knowledge Graph**: Connects abnormal biomarkers to potential clinical causes, dietary recommendations, and exercise insights.
+- **Longitudinal Trend Builder**: Compares current biomarkers with historical lab tests to generate temporal trend vectors.
+</details>
+
+<details>
+<summary><b>🤖 Phase 7: Report-Scoped RAG Assistant & Workspace</b></summary>
+<br>
+
+- **Report-Grounded RAG**: OpenAI **GPT-5 Nano** inference strictly bound to the verified lab report JSON context.
+- **Split-Screen Workspace**: Modern dual-pane dashboard with instant evidence lookup, citation source cards, and organ summaries.
+- **Audit Hash Verification**: Every AI response includes a cryptographic hash of the input context for 100% transparency.
+</details>
 
 ---
 
-## 🛠️ Tech Stack
+## 🫀 5-Organ System Intelligence Matrix
 
-| Component | Technology | Description |
+> [!NOTE]
+> HealthLens AI evaluates lab parameters deterministically across 5 vital organ systems to compute an evidence-backed health score (0–100).
+
+```text
+┌───────────────────────────┬───────────────────────────────────────────┬──────────────────────────────┐
+│ Organ System              │ Biomarkers Assessed                       │ Risk Categories              │
+├───────────────────────────┼───────────────────────────────────────────┼──────────────────────────────┤
+│ 🫀 Cardiovascular          │ Total Cholesterol, HDL, LDL, Triglycerides│ Normal / Elevated / Critical │
+│ 🩸 Hematologic            │ Hemoglobin, RBC, WBC, Platelets, Hematocrit│ Normal / Anemic / Infection  │
+│ 🧪 Metabolic & Endocrine  │ HbA1c, Fasting Glucose, TSH, Free T3/T4   │ Optimal / Diabetic Risk      │
+│ 🫘 Renal & Kidney         │ Creatinine, BUN, eGFR, Uric Acid          │ Normal / Impairment Risk     │
+│ 🫁 Hepatic & Liver        │ ALT, AST, ALP, Bilirubin, Albumin         │ Normal / Hepatic Strain      │
+└───────────────────────────┴───────────────────────────────────────────┴──────────────────────────────┘
+```
+
+---
+
+## 🛡️ 5-Layer Safety & Guardrail Architecture
+
+```mermaid
+graph LR
+    UserQuery["User Query"] --> G1["1. Input Guard"]
+    G1 --> G2["2. Privacy Guard (PHI Scrubbing)"]
+    G2 --> G3["3. Context Grounding Guard"]
+    G3 --> G4["4. Medical Compliance Guard"]
+    G4 --> G5["5. Token Budget & Rate Limiter"]
+    G5 --> LLM["OpenAI GPT-5 Nano Inference"]
+    LLM --> VerifiedOutput["Grounded Clinical Response"]
+```
+
+1. **Input Guard**: Sanitizes incoming user prompts against prompt injection and malicious payload vectors.
+2. **Privacy Guard (PHI/PII)**: Automatically redacts personal health identifiers (Names, SSNs, DOBs) before cloud LLM API transmission.
+3. **Context Grounding Guard**: Enforces strict document retrieval context — prevents LLM from fabricating medical data not present in the lab report.
+4. **Medical Compliance Guard**: Appends mandatory clinical disclaimers and diagnostic disclaimers to every response.
+5. **Token Budget Limiter**: Enforces sliding token budget caps to ensure low latency and prevent API cost overruns.
+
+---
+
+## 🧪 Test Coverage & Quality Matrix (250/250 Passed)
+
+> [!TIP]
+> The automated test suite achieves **100% pass rate across 250 unit, integration, and API tests** in under 15 seconds.
+
+```bash
+cd backend
+python -m pytest --verbose
+```
+
+```text
+========================================== 250 passed in 14.82s ==========================================
+✓ test/test_auth.py                     (Authentication, Password Hashing & JWT Verification)   [18 Tests]
+✓ test/test_upload.py                   (File Ingestion, Format Checks & SHA-256 Storage)       [22 Tests]
+✓ test/test_ocr.py                      (Dual OCR Engine Router, Layout & Bounding Boxes)        [35 Tests]
+✓ test/test_medical_parser.py           (Parameter Alias Resolution & Value Parsing)           [42 Tests]
+✓ test/test_phase4_validation.py        (Unit Conversions, Numeric Ranges & Inequality Bounds)  [28 Tests]
+✓ test/test_phase5_hardening.py         (Physiological Sanity Boundaries & Outlier Rejection)   [24 Tests]
+✓ test/test_phase5_validation_full.py   (Age/Gender Reference Ranges & Critical Panic Rules)     [38 Tests]
+✓ test/test_phase6_intelligence.py      (5-Organ Health Score Algorithms & Knowledge Graph)    [25 Tests]
+✓ test/test_phase7_rag_chat.py          (GPT-5 Nano RAG Grounding & 5-Layer Safety Firewall)   [18 Tests]
+```
+
+---
+
+## 🛠️ Tech Stack & Dependencies
+
+| Layer | Component | Version / Library |
 | :--- | :--- | :--- |
-| **Frontend Framework** | `React 18` + `Vite` | High-performance SPA with instant HMR and dynamic routing |
-| **Styling & Icons** | `TailwindCSS` + `Lucide React` | Modern dark-mode UI with sleek glassmorphic aesthetics |
-| **Backend Framework** | `FastAPI (Python 3.11+)` | Asynchronous RESTful API server with auto OpenAPI docs |
-| **Database** | `SQLite / PostgreSQL` | Relational database schema with SQLAlchemy ORM & Alembic migrations |
-| **AI / LLM Gateway** | `OpenAI GPT-5 Nano` | Cost-effective, low-latency clinical reasoning model |
-| **OCR Engines** | `PyMuPDF` + `Sarvam Doc/Vision` | Multi-engine document text and image table layout extraction |
-| **Testing Framework** | `Pytest` + `Vitest` | 100% automated test coverage across unit, integration, and API tests |
+| **Frontend UI** | `React` + `Vite` | React 18, Vite 5, TailwindCSS 3, Lucide Icons, Recharts |
+| **Backend API** | `FastAPI` | Python 3.11+, Pydantic v2, Uvicorn, SQLAlchemy, Alembic |
+| **Database** | `SQLite / PostgreSQL` | Relational DB with async connection pooling |
+| **AI / LLM** | `OpenAI API` | `gpt-5-nano` / `gpt-4o-mini` with fallback provider gateway |
+| **OCR Engines** | `PyMuPDF` + `Sarvam` | PyMuPDF 1.23+, Sarvam Vision API, EasyOCR / Tesseract |
+| **Testing** | `Pytest` | Pytest 8+, Pytest-AsyncIO, Coverage |
 
 ---
 
-## 💻 Installation & Setup
+## 🚀 Quick Start & Installation Guide
 
 ### Prerequisites
 - **Node.js** v18+ & **npm** v9+
 - **Python** v3.11+
 - **Git**
 
-### 1. Clone Repository
+### 1. Clone & Set Up Directory
 ```bash
 git clone https://github.com/CODEX-Hackfest-2026/CX012-Iveri.git
 cd CX012-Iveri
 ```
 
-### 2. Backend Setup
+### 2. Configure Backend Environment
 ```bash
 cd backend
 python -m venv .venv
 
-# On Linux/macOS:
-source .venv/bin/activate
+# Activate virtual environment:
 # On Windows (PowerShell):
 .venv\Scripts\activate
+# On Linux/macOS:
+source .venv/bin/activate
 
 pip install -r requirements.txt
 ```
 
-### 3. Frontend Setup
+### 3. Configure Frontend Environment
 ```bash
 cd ../frontend
 npm install
 ```
 
----
+### 4. Run Application Locally
 
-## 🚀 How to Run
-
-### Option A: Standard Development Mode
-
-**Backend (Terminal 1):**
+**Terminal 1 — Backend Server:**
 ```bash
 cd backend
-# Make sure .venv is activated
 uvicorn src.app.main:app --reload --host 0.0.0.0 --port 8000
 ```
-> API Swagger Documentation will be live at: `http://localhost:8000/docs`
+* Swagger Docs live at: `http://localhost:8000/docs`
 
-**Frontend (Terminal 2):**
+**Terminal 2 — Frontend Dev Server:**
 ```bash
 cd frontend
 npm run dev
 ```
-> Web Application UI will be live at: `http://localhost:5173`
+* Application live at: `http://localhost:5173`
 
 ---
 
-## 🧪 Comprehensive Test Suite (250 / 250 Tests Passing)
+## 📡 API Endpoint Reference
 
-The project includes an exhaustive automated test suite covering unit tests, service logic, API endpoints, validation rules, RAG pipelines, and end-to-end integration flows.
-
-### Execute Backend Test Suite
-```bash
-cd backend
-python -m pytest
-```
-
-### Test Coverage Summary:
-```text
-============================== 250 passed in 14.82s ==============================
-✓ test/test_auth.py                     (Authentication & JWT Security - 18 tests)
-✓ test/test_upload.py                   (File Upload & SHA-256 Storage - 22 tests)
-✓ test/test_ocr.py                      (Dual OCR Engine & Table Extractor - 35 tests)
-✓ test/test_medical_parser.py           (Entity Parser & Dictionary - 42 tests)
-✓ test/test_phase4_validation.py        (Range Normalizer & Unit Converter - 28 tests)
-✓ test/test_phase5_validation_full.py   (Physiological Hardening & Panic Rules - 38 tests)
-✓ test/test_phase5_hardening.py         (Boundary Sanity & Outlier Checks - 24 tests)
-✓ test/test_phase6_intelligence.py      (5-Organ Scoring & Knowledge Graph - 25 tests)
-✓ test/test_phase7_rag_chat.py          (GPT-5 Nano RAG & 5-Guardrail Firewall - 18 tests)
-```
+| Method | Endpoint | Description | Auth Required |
+| :---: | :--- | :--- | :---: |
+| `POST` | `/api/v1/auth/register` | Create new user account | ❌ No |
+| `POST` | `/api/v1/auth/login` | Authenticate user & receive JWT token | ❌ No |
+| `GET` | `/api/v1/health` | Service health status & subsystem check | ❌ No |
+| `POST` | `/api/v1/upload` | Upload lab report PDF/image & return tracking ID | 🔒 Bearer |
+| `POST` | `/api/v1/ocr` | Run Dual OCR extraction on uploaded file | 🔒 Bearer |
+| `POST` | `/api/v1/parser` | Parse raw OCR text into structured lab parameters | 🔒 Bearer |
+| `POST` | `/api/v1/validation` | Run physiological sanity & reference range validation | 🔒 Bearer |
+| `POST` | `/api/v1/analysis` | Compute 5-organ health scores, insights & timeline | 🔒 Bearer |
+| `POST` | `/api/v1/chat` | Query GPT-5 Nano RAG Assistant with 5-layer safety | 🔒 Bearer |
 
 ---
 
-## 🔗 Key API Endpoints Reference
+## 📄 License & Compliance
 
-| Method | Endpoint | Description |
-| :--- | :--- | :--- |
-| `POST` | `/api/v1/auth/register` | Register new user account |
-| `POST` | `/api/v1/auth/login` | Authenticate user & issue JWT bearer token |
-| `POST` | `/api/v1/upload` | Upload lab report PDF/image & return SHA-256 tracking ID |
-| `POST` | `/api/v1/ocr` | Trigger Dual OCR extraction on uploaded report |
-| `POST` | `/api/v1/parser` | Parse raw OCR text into structured lab parameters |
-| `POST` | `/api/v1/validation` | Validate medical values against age/gender reference ranges |
-| `POST` | `/api/v1/analysis` | Generate 5-organ health scores, disease insights & timeline |
-| `POST` | `/api/v1/chat` | Query GPT-5 Nano RAG Assistant with 5-layer safety guardrails |
-
----
-
-## 📄 License & Shared Template Compliance
-
-This README is configured for the **CODEX Hackfest 2026** competition guidelines for Team `CX012 (Iveri)`. All code, documentation, schemas, and tests remain under team ownership.
+Configured for **CODEX Hackfest 2026** competition submission for **Team CX012 (Iveri)**.  
+All code, architecture documentation, models, and test suites are maintained under team license.
